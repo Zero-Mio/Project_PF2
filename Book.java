@@ -1,4 +1,13 @@
 public class Book {
+    /*****
+    TODO
+     Implement the following methods and test:
+     -Book
+     -borrowed
+     -returned
+     -isBorrowed
+     -getTitle
+     *****/
 
     String title;
     boolean borrowed;
