@@ -27,6 +27,9 @@ public class Book {
     // Marks the book as not rented
     public void returned() {
         // Implement this method
+        if (borrowed) {
+            borrowed = false;
+        }
     }
 
     // Returns true if the book is rented, false otherwise
