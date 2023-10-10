@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Book {
     /*****
     TODO
@@ -12,6 +14,8 @@ public class Book {
 
     String title;
     boolean borrowed;
+    ArrayList<String> books = new ArrayList<String>();
+    ArrayList<Integer> numOfBooks = new ArrayList<Integer>();
 
     // Creates a new Book
 
