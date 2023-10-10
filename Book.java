@@ -37,6 +37,7 @@ public class Book {
     // Returns the title of the book
     public String getTitle() {
         // Implement this method
+        return title;
     }
 
     public static void main(String[] arguments) {
