@@ -22,6 +22,7 @@ public class Book {
     // Marks the book as rented
     public void borrowed() {
         // Implement this method
+        
     }
 
     // Marks the book as not rented
@@ -35,7 +36,9 @@ public class Book {
     // Returns true if the book is rented, false otherwise
     public boolean isBorrowed() {
         // Implement this method
+        return borrowed;
     }
+
 
     // Returns the title of the book
     public String getTitle() {
