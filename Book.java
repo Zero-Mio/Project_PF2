@@ -22,7 +22,7 @@ public class Book {
     // Marks the book as rented
     public void borrowed() {
         // Implement this method
-        
+        borrowed = true;
     }
 
     // Marks the book as not rented
