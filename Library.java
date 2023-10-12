@@ -1,5 +1,17 @@
 public class Library {
     // Add the missing implementation to this class
+    /*
+    TODO
+     Implemet the following methods and test:
+     -two constructors one with two args and one with file name
+     - addbook method that calls upon the book class
+     - println saying library hours from 9-5
+     -call constructor for library address
+     -borrowedBook method will call borrowed method from book.java
+     -print title of available books (Through an array)
+     - call returned method in book.java
+     - see how many books are available
+     */
 
     public static void main(String[] args) {
 //        // Create two libraries
