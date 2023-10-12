@@ -2,12 +2,12 @@ public class Book {
     /*****
     TODO
      Implement the following methods and test:
-     -Book
-     -borrowed
-     -returned
-     -isBorrowed
-     -getTitle
-     -rented
+     -Book (Done)
+     -borrowed (Done)
+     -returned (Done)
+     -isBorrowed (Done)
+     -getTitle (Done)
+     -rented (Done)
      *****/
     String title;
     boolean borrowed;
