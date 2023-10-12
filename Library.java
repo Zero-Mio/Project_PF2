@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Library {
     // Add the missing implementation to this class
     /*
@@ -12,6 +14,10 @@ public class Library {
      - call returned method in book.java
      - see how many books are available
      */
+
+    private String address, fileName;
+    ArrayList<String> bookNames = new ArrayList<String>();
+    ArrayList <Integer> numOfBooks = new ArrayList<Integer>();
 
     public static void main(String[] args) {
 //        // Create two libraries
