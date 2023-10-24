@@ -31,6 +31,10 @@ public class Library {
         this.fileName = fileName;
     }
 
+    public static void printOpeningHours() {
+        System.out.println("Libraris are open daily from 9am to 5pm. ");
+    }
+
     public static void main(String[] args) {
 //        // Create two libraries
 //        Library firstLibrary = new Library("10 Main St.");
@@ -49,7 +53,7 @@ public class Library {
 //        System.out.println("Library hours:");
 //        printOpeningHours();
 //        System.out.println();
-//
+
 //        System.out.println("Library addresses:");
 //        firstLibrary.printAddress();
 //        secondLibrary.printAddress();
