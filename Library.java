@@ -19,6 +19,18 @@ public class Library {
     ArrayList<String> bookNames = new ArrayList<String>();
     ArrayList <Integer> numOfBooks = new ArrayList<Integer>();
 
+    public Library() {
+    }
+
+    public Library(String address) {
+        this(address,null);
+    }
+
+    public Library(String address, String fileName) {
+        this.address = address;
+        this.fileName = fileName;
+    }
+
     public static void main(String[] args) {
 //        // Create two libraries
 //        Library firstLibrary = new Library("10 Main St.");
