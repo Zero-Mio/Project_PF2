@@ -16,8 +16,7 @@ public class Library {
      */
 
     private String address, fileName;
-    ArrayList<String> bookNames = new ArrayList<String>();
-    ArrayList <Integer> numOfBooks = new ArrayList<Integer>();
+    static ArrayList<Object> bookNames = new ArrayList<Object>();
 
     public Library() {
     }
@@ -35,19 +34,23 @@ public class Library {
         System.out.println("Libraris are open daily from 9am to 5pm. ");
     }
 
+    public void addBook(Book b){
+        bookNames.add(b.getTitle());
+    }
+
     public static void main(String[] args) {
 //        // Create two libraries
-//        Library firstLibrary = new Library("10 Main St.");
+        Library firstLibrary = new Library("10 Main St.");
 //        Library secondLibrary = new Library("228 Liberty St.");
 //        Library thirdLibrary = new Library("12 Broadway St.", "catalog.txt");
 //
 //        // Add four books to the first library
-//        firstLibrary.addBook(new Book("The Da Vinci Code"));
-//        firstLibrary.addBook(new Book("The Da Vinci Code")); // second copy
-//        firstLibrary.addBook(new Book("Le Petit Prince"));
-//        firstLibrary.addBook(new Book("A Tale of Two Cities"));
-//        firstLibrary.addBook(new Book("The Lord of the Rings"));
-//        firstLibrary.addBook(new Book("The Lord of the Rings")); // second copy
+        firstLibrary.addBook(new Book("The Da Vinci Code"));
+        firstLibrary.addBook(new Book("The Da Vinci Code")); // second copy
+        firstLibrary.addBook(new Book("Le Petit Prince"));
+        firstLibrary.addBook(new Book("A Tale of Two Cities"));
+        firstLibrary.addBook(new Book("The Lord of the Rings"));
+        firstLibrary.addBook(new Book("The Lord of the Rings")); // second copy
 //
 //        // Print opening hours and the addresses
 //        System.out.println("Library hours:");
