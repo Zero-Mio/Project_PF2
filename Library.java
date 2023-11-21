@@ -1,4 +1,8 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class Library {
     // Add the missing implementation to this class
@@ -17,6 +21,8 @@ public class Library {
 
     private String address, fileName;
     static ArrayList<Book> bookNames = new ArrayList<Book>();
+    static ArrayList<String[]> bookName = new ArrayList<String[]>();
+
 
     public Library() {
 
@@ -42,9 +48,29 @@ public class Library {
     public void addBook(Book b){
         bookNames.add(b);
     }
+    public void readData() throws IOException {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(fileName));
+            String line = "";
+            while ((line = br.readLine()) != null) {
 
+                bookName.add(line.split(","));
 
-    public static void main(String[] args)  {
+            }
+        }
+        catch (FileNotFoundException e) {
+
+        }
+    }
+
+    public void test () throws IOException {
+        readData();
+        for(int i = 0; i < bookName.size(); i++){
+            System.out.println(bookName.get(i));
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
         // Create two libraries
         Library firstLibrary = new Library("10 Main St.");
         Library secondLibrary = new Library("228 Liberty St.");
@@ -68,8 +94,9 @@ public class Library {
         secondLibrary.printAddress();
         thirdLibrary.printAddress();
         System.out.println();
-        
 
+
+        thirdLibrary.test();
         // Try to borrow The Lords of the Rings from both libraries
 //        System.out.println("Borrowing The Lord of the Rings:");
 //        firstLibrary.borrowBook("The Lord of the Rings");
