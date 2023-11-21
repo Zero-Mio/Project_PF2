@@ -43,6 +43,13 @@ public class Library {
         bookNames.add(b);
     }
 
+    public void borrowBook(String bookTitle){
+        boolean bookFound = false;
+       for(int i = 0; i < bookNames.size(); i++){
+
+       }
+    }
+
 
     public static void main(String[] args)  {
         // Create two libraries
@@ -68,7 +75,7 @@ public class Library {
         secondLibrary.printAddress();
         thirdLibrary.printAddress();
         System.out.println();
-        
+
 
         // Try to borrow The Lords of the Rings from both libraries
 //        System.out.println("Borrowing The Lord of the Rings:");
