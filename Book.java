@@ -48,6 +48,11 @@ public class Book {
         return title;
     }
 
+    @Override
+    public String toString() {
+        return title;
+    }
+
     public static void main(String[] arguments) {
         // Small test of the Book class
         Book example = new Book("The Da Vinci Code");

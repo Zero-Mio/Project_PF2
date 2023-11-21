@@ -32,7 +32,7 @@ public class Library {
     }
 
     public static void printOpeningHours() {
-        System.out.println("Libraris are open daily from 9am to 5pm. ");
+        System.out.println("Libraries are open daily from 9am to 5pm. ");
     }
 
     public void printAddress() {
@@ -43,13 +43,6 @@ public class Library {
         bookNames.add(b);
     }
 
-    public void test ( ) {
-        System.out.println(bookNames.get(0));
-//
-//        for(int i = 0; i < bookNames.size();i++){
-//            System.out.println(bookNames.get(i).toString());
-//        }
-    }
 
     public static void main(String[] args)  {
         // Create two libraries
@@ -75,8 +68,7 @@ public class Library {
         secondLibrary.printAddress();
         thirdLibrary.printAddress();
         System.out.println();
-
-        firstLibrary.test();
+        
 
         // Try to borrow The Lords of the Rings from both libraries
 //        System.out.println("Borrowing The Lord of the Rings:");
