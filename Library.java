@@ -16,13 +16,14 @@ public class Library {
      */
 
     private String address, fileName;
-    static ArrayList<Object> bookNames = new ArrayList<Object>();
+    static ArrayList<Book> bookNames = new ArrayList<Book>();
 
     public Library() {
+
     }
 
     public Library(String address) {
-        this(address,null);
+        this.address = address;
     }
 
     public Library(String address, String fileName) {
@@ -39,14 +40,22 @@ public class Library {
     }
 
     public void addBook(Book b){
-        bookNames.add(b.getTitle());
+        bookNames.add(b);
     }
 
-    public static void main(String[] args) {
+    public void test ( ) {
+        System.out.println(bookNames.get(0));
+//
+//        for(int i = 0; i < bookNames.size();i++){
+//            System.out.println(bookNames.get(i).toString());
+//        }
+    }
+
+    public static void main(String[] args)  {
         // Create two libraries
         Library firstLibrary = new Library("10 Main St.");
         Library secondLibrary = new Library("228 Liberty St.");
-        Library thirdLibrary = new Library("12 Broadway St.", "catalog.txt");
+        Library thirdLibrary = new Library("12 Broadway St.", "catalog.csv");
 
         // Add four books to the first library
         firstLibrary.addBook(new Book("The Da Vinci Code"));
@@ -66,6 +75,8 @@ public class Library {
         secondLibrary.printAddress();
         thirdLibrary.printAddress();
         System.out.println();
+
+        firstLibrary.test();
 
         // Try to borrow The Lords of the Rings from both libraries
 //        System.out.println("Borrowing The Lord of the Rings:");
