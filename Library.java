@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.Arrays;
 
 public class Library {
     // Add the missing implementation to this class
@@ -55,7 +56,6 @@ public class Library {
             while ((line = br.readLine()) != null) {
 
                 bookName.add(line.split(","));
-
             }
         }
         catch (FileNotFoundException e) {
@@ -66,7 +66,7 @@ public class Library {
     public void test () throws IOException {
         readData();
         for(int i = 0; i < bookName.size(); i++){
-            System.out.println(bookName.get(i));
+            System.out.println(Arrays.toString(bookName.get(i)));
         }
     }
 
@@ -95,8 +95,7 @@ public class Library {
         thirdLibrary.printAddress();
         System.out.println();
 
-
-        thirdLibrary.test();
+        
         // Try to borrow The Lords of the Rings from both libraries
 //        System.out.println("Borrowing The Lord of the Rings:");
 //        firstLibrary.borrowBook("The Lord of the Rings");
