@@ -16,7 +16,7 @@ public class Library {
      */
 
     private String address, fileName;
-    static ArrayList<Book> bookNames = new ArrayList<Book>();
+    private ArrayList<Book> bookNames = new ArrayList<Book>();
 
     public Library() {
 
@@ -43,11 +43,35 @@ public class Library {
         bookNames.add(b);
     }
 
-    public void borrowBook(String bookTitle){
-        boolean bookFound = false;
-       for(int i = 0; i < bookNames.size(); i++){
+    public void borrowBook(String bookTitle) {
+        int availableCopies = countAvaliableBooks(bookTitle);
 
-       }
+        if (availableCopies > 0) {
+            for (Book book : bookNames) {
+                if (book.getTitle().equals(bookTitle) && !book.isBorrowed()) {
+                    book.borrowed();
+                    availableCopies--;
+                    System.out.println("You successfully borrowed " + bookTitle +
+                            ". Remaining number of copies: " + availableCopies);
+                    return;
+                }
+            }
+            System.out.println("Sorry, this book is already borrowed.");
+        } else {
+            System.out.println("Sorry, this book is not in our catalog.");
+        }
+    }
+
+
+    private int countAvaliableBooks(String bookTitle){
+        int count = 0;
+        for(Book book : bookNames){
+            if(book.getTitle().equals(bookTitle) && !book.isBorrowed()){
+                count++;
+            }
+        }
+        return count;
+
     }
 
 
@@ -78,13 +102,13 @@ public class Library {
 
 
         // Try to borrow The Lords of the Rings from both libraries
-//        System.out.println("Borrowing The Lord of the Rings:");
-//        firstLibrary.borrowBook("The Lord of the Rings");
-//        firstLibrary.borrowBook("The Lord of the Rings");
-//        firstLibrary.borrowBook("The Lord of the Rings");
-//        secondLibrary.borrowBook("The Lord of the Rings");
-//        System.out.println();
-//
+        System.out.println("Borrowing The Lord of the Rings:");
+        firstLibrary.borrowBook("The Lord of the Rings");
+        firstLibrary.borrowBook("The Lord of the Rings");
+        firstLibrary.borrowBook("The Lord of the Rings");
+        secondLibrary.borrowBook("The Lord of the Rings");
+        System.out.println();
+
 //        // Print the titles of all available books from both libraries
 //        System.out.println("Books available in the first library:");
 //        firstLibrary.printAvailableBooks();
