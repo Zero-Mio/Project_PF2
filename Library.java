@@ -48,15 +48,20 @@ public class Library {
 
         if (availableCopies > 0) {
             for (Book book : bookNames) {
-                if (book.getTitle().equals(bookTitle) && !book.isBorrowed()) {
-                    book.borrowed();
-                    availableCopies--;
-                    System.out.println("You successfully borrowed " + bookTitle +
-                            ". Remaining number of copies: " + availableCopies);
-                    return;
+                if (book.getTitle().equals(bookTitle)) {
+                    if (!book.isBorrowed()){
+                        book.borrowed();
+
+                        System.out.println("You successfully borrowed " + bookTitle +
+                                ". Remaining number of copies: " + (countAvaliableBooks(bookTitle)));
+                        return;
+                    }
+                    else {
+                        System.out.println("Sorry, this book is already borrowed.");
+                        return;
+                    }
                 }
             }
-            System.out.println("Sorry, this book is already borrowed.");
         } else {
             System.out.println("Sorry, this book is not in our catalog.");
         }
