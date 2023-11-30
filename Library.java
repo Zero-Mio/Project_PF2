@@ -59,9 +59,57 @@ public class Library {
             }
         }
         catch (FileNotFoundException e) {
+        }
+
 
         }
+
+    public void borrowBook(String bookTitle) {
+        int availableCopies = countAvaliableBooks(bookTitle);
+
+        if (availableCopies > 0) {
+            for (Book book : bookNames) {
+                if (book.getTitle().equals(bookTitle)) {
+                    if (!book.isBorrowed()){
+                        book.borrowed();
+
+                        System.out.println("You successfully borrowed " + bookTitle +
+                                ". Remaining number of copies: " + (countAvaliableBooks(bookTitle)));
+                        return;
+                    }
+                    else {
+                        System.out.println("Sorry, this book is already borrowed.");
+                        return;
+                    }
+                }
+            }
+        } else {
+            System.out.println("Sorry, this book is not in our catalog.");
+        }
     }
+
+
+    private int countAvaliableBooks(String bookTitle){
+        int count = 0;
+        for(Book book : bookNames){
+            if(book.getTitle().equals(bookTitle) && !book.isBorrowed()){
+                count++;
+            }
+        }
+        return count;
+
+    }
+
+    public void printAvailableBooks(){
+        if (bookNames.size() <= 0) {
+            System.out.println("No book in catalog.");
+        }else{
+            for (Book book : bookNames) {
+                System.out.println(book.getTitle() + ", remaining number of copies: " + countAvaliableBooks(book.getTitle()));
+            }
+        }
+    }
+
 
     public void test () throws IOException {
         readData();
@@ -97,22 +145,22 @@ public class Library {
 
         
         // Try to borrow The Lords of the Rings from both libraries
-//        System.out.println("Borrowing The Lord of the Rings:");
-//        firstLibrary.borrowBook("The Lord of the Rings");
-//        firstLibrary.borrowBook("The Lord of the Rings");
-//        firstLibrary.borrowBook("The Lord of the Rings");
-//        secondLibrary.borrowBook("The Lord of the Rings");
-//        System.out.println();
-//
+        System.out.println("Borrowing The Lord of the Rings:");
+        firstLibrary.borrowBook("The Lord of the Rings");
+        firstLibrary.borrowBook("The Lord of the Rings");
+        firstLibrary.borrowBook("The Lord of the Rings");
+        secondLibrary.borrowBook("The Lord of the Rings");
+        System.out.println();
+
 //        // Print the titles of all available books from both libraries
-//        System.out.println("Books available in the first library:");
-//        firstLibrary.printAvailableBooks();
-//        System.out.println();
-//        System.out.println("Books available in the second library:");
-//        secondLibrary.printAvailableBooks();
-//        System.out.println("Books available in the third library:");
-//        thirdLibrary.printAvailableBooks();
-//        System.out.println();
+        System.out.println("Books available in the first library:");
+        firstLibrary.printAvailableBooks();
+        System.out.println();
+        System.out.println("Books available in the second library:");
+        secondLibrary.printAvailableBooks();
+        System.out.println("Books available in the third library:");
+        thirdLibrary.printAvailableBooks();
+        System.out.println();
 //
 //        // Return The Lords of the Rings to the first library
 //        System.out.println("Returning The Lord of the Rings:");
