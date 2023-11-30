@@ -74,6 +74,15 @@ public class Library {
 
     }
 
+    public void printAvailableBooks() {
+        if (bookNames.size() <= 0) {
+            System.out.println("No book in catalog.");
+        }else{
+            for (Book book : bookNames) {
+                System.out.println(book.getTitle() + ", remaining number of copies: " + countAvaliableBooks(book.getTitle()));
+            }
+        }
+    }
 
     public static void main(String[] args)  {
         // Create two libraries
@@ -110,14 +119,14 @@ public class Library {
         System.out.println();
 
 //        // Print the titles of all available books from both libraries
-//        System.out.println("Books available in the first library:");
-//        firstLibrary.printAvailableBooks();
-//        System.out.println();
-//        System.out.println("Books available in the second library:");
-//        secondLibrary.printAvailableBooks();
-//        System.out.println("Books available in the third library:");
-//        thirdLibrary.printAvailableBooks();
-//        System.out.println();
+        System.out.println("Books available in the first library:");
+        firstLibrary.printAvailableBooks();
+        System.out.println();
+        System.out.println("Books available in the second library:");
+        secondLibrary.printAvailableBooks();
+        System.out.println("Books available in the third library:");
+        thirdLibrary.printAvailableBooks();
+        System.out.println();
 //
 //        // Return The Lords of the Rings to the first library
 //        System.out.println("Returning The Lord of the Rings:");
