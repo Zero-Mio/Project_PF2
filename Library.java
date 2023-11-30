@@ -21,8 +21,8 @@ public class Library {
      */
 
     private String address, fileName;
-    static ArrayList<Book> bookNames = new ArrayList<Book>();
-    static ArrayList<String[]> bookName = new ArrayList<String[]>();
+    private ArrayList<Book> bookNames = new ArrayList<Book>();
+    private ArrayList<String[]> bookName = new ArrayList<String[]>();
 
 
     public Library() {
