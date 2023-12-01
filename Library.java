@@ -33,10 +33,6 @@ public class Library {
         this.address = address;
     }
 
-    public Library(String address, String fileName) {
-        this.address = address;
-        this.fileName = fileName;
-    }
 
     public static void printOpeningHours() {
         System.out.println("Libraries are open daily from 9am to 5pm. ");
@@ -49,44 +45,50 @@ public class Library {
     public void addBook(Book b){
         bookNames.add(b);
     }
-    public void readData() throws IOException {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
-            String line = "";
-            while ((line = br.readLine()) != null) {
 
-                bookName.add(line.split(","));
-            }
-        }
-        catch (FileNotFoundException e) {
-        }
+    public Library(String libraryAddress, String catalogFile) {
+        this(libraryAddress);
+        loadCatalogFromFile(catalogFile);
+    }
+    // Load books from a CSV catalog file without external libraries
 
-
+    private void loadCatalogFromFile(String catalogFile) {
+        if (catalogFile == null || catalogFile.isEmpty()) {
+            System.out.println("Catalog file not provided. Skipping catalog loading.");
+            return;
         }
 
-    public void borrowBook(String bookTitle) {
-        int availableCopies = countAvaliableBooks(bookTitle);
+        try (BufferedReader reader = new BufferedReader(new FileReader(catalogFile))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
 
-        if (availableCopies > 0) {
-            for (Book book : bookNames) {
-                if (book.getTitle().equals(bookTitle)) {
-                    if (!book.isBorrowed()){
-                        book.borrowed();
+                if (parts.length >= 2) {
+                    String bookTitle = parts[0].trim();
+                    int numCopies = Integer.parseInt(parts[1].trim());
 
-                        System.out.println("You successfully borrowed " + bookTitle +
-                                ". Remaining number of copies: " + (countAvaliableBooks(bookTitle)));
-                        return;
-                    }
-                    else {
-                        System.out.println("Sorry, this book is already borrowed.");
-                        return;
+                    for (int i = 0; i < numCopies; i++) {
+                        addBook(new Book(bookTitle));
                     }
                 }
             }
-        } else {
-            System.out.println("Sorry, this book is not in our catalog.");
+        } catch (IOException | NumberFormatException e) {
+            System.err.println("Error loading catalog from file: " + e.getMessage());
         }
     }
+
+    public void borrowBook(String bookTitle) {
+        int availableCopies = countAvaliableBooks(bookTitle);
+        if (availableCopies > 0) {
+            for (Book book : bookNames) {
+                if (book.getTitle().equals(bookTitle) && !book.isBorrowed()) {
+                    book.borrowed();
+                    System.out.println("You successfully borrowed " + bookTitle +
+                            ". Remaining number of copies: " + (countAvaliableBooks(bookTitle)));
+                  }
+                }
+            }
+        }
 
 
     private int countAvaliableBooks(String bookTitle){
@@ -100,23 +102,25 @@ public class Library {
 
     }
 
-    public void printAvailableBooks(){
-        if (bookNames.size() <= 0) {
-            System.out.println("No book in catalog.");
-        }else{
-            for (Book book : bookNames) {
+    public void printAvailableBooks() {
+        for (Book book : bookNames) {
+            if (!book.isBorrowed()) {
                 System.out.println(book.getTitle() + ", remaining number of copies: " + countAvaliableBooks(book.getTitle()));
             }
         }
     }
 
-
-    public void test () throws IOException {
-        readData();
-        for(int i = 0; i < bookName.size(); i++){
-            System.out.println(Arrays.toString(bookName.get(i)));
+    public void returnBook(String bookTitle) {
+        for (Book book : bookNames) {
+            if (book.getTitle().equals(bookTitle) && book.isBorrowed()) {
+                book.returned();
+                System.out.println("You successfully returned " + bookTitle +
+                        ", remaining number of copies: " + countAvaliableBooks(bookTitle));
+                return;
+            }
         }
     }
+
 
     public static void main(String[] args) throws IOException {
         // Create two libraries
@@ -163,12 +167,12 @@ public class Library {
         System.out.println();
 //
 //        // Return The Lords of the Rings to the first library
-//        System.out.println("Returning The Lord of the Rings:");
-//        firstLibrary.returnBook("The Lord of the Rings");
-//        System.out.println();
-//
-//        // Print the titles of available from the first library
-//        System.out.println("Books available in the first library:");
-//        firstLibrary.printAvailableBooks();
+        System.out.println("Returning The Lord of the Rings:");
+        firstLibrary.returnBook("The Lord of the Rings");
+        System.out.println();
+
+        // Print the titles of available from the first library
+        System.out.println("Books available in the first library:");
+        firstLibrary.printAvailableBooks();
     }
 }
