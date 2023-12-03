@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Arrays;
+import java.util.List;
 
 public class Library {
     // Add the missing implementation to this class
@@ -85,10 +86,17 @@ public class Library {
                     book.borrowed();
                     System.out.println("You successfully borrowed " + bookTitle +
                             ". Remaining number of copies: " + (countAvaliableBooks(bookTitle)));
+                    return;
                   }
                 }
             }
-        }
+        if (availableCopies == 0){
+                System.out.println("Sorry, this book is already borrowed. ");
+            }
+            else {
+                System.out.println("Sorry, this book is not in our catalog. ");
+                }
+            }
 
 
     private int countAvaliableBooks(String bookTitle){
@@ -102,9 +110,13 @@ public class Library {
 
     }
 
-    public void printAvailableBooks() {
-        for (Book book : bookNames) {
-            if (!book.isBorrowed()) {
+    public void printAvailableBooks(){
+        //using an array list as recommended
+        List<String> usedNames = new ArrayList<>();
+
+        for (Book book : bookNames){
+            if(!book.isBorrowed() && !usedNames.contains(book.getTitle())){
+                usedNames.add(book.getTitle());
                 System.out.println(book.getTitle() + ", remaining number of copies: " + countAvaliableBooks(book.getTitle()));
             }
         }
