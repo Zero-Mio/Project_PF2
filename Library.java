@@ -50,7 +50,7 @@ public class Library {
         loadCatalogFromFile(catalogFile);
     }
     // Load books from a CSV catalog file without external libraries
-
+    //CVS file use solution was found through chatGPT
     private void loadCatalogFromFile(String catalogFile) {
         if (catalogFile == null || catalogFile.isEmpty()) {
             System.out.println("Catalog file not provided. Skipping catalog loading.");
@@ -116,7 +116,7 @@ public class Library {
         for (Book book : bookNames) {
             String title = book.getTitle();
 
-            //Found a new array that would print out the lord of the rings: 0 and chatGpt helped craft it
+            //Found a new array that would print out the lord of the rings: 0 and chatGPT helped craft it
             int leftCopies = notUsedCopiesMap.getOrDefault(title, 0);
             if (!book.isBorrowed()) {
                 leftCopies++;
