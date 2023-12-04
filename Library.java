@@ -1,10 +1,8 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.Arrays;
-import java.util.List;
 
 public class Library {
     // Add the missing implementation to this class
@@ -43,7 +41,7 @@ public class Library {
         System.out.println(address);
     }
 
-    public void addBook(Book b){
+    public void addBook(Book b) {
         bookNames.add(b);
     }
 
@@ -84,25 +82,23 @@ public class Library {
             for (Book book : bookNames) {
                 if (book.getTitle().equals(bookTitle) && !book.isBorrowed()) {
                     book.borrowed();
+                    availableCopies--;
                     System.out.println("You successfully borrowed " + bookTitle +
-                            ". Remaining number of copies: " + (countAvaliableBooks(bookTitle)));
+                            ". Remaining number of copies: " + availableCopies);
                     return;
-                  }
                 }
             }
-        if (availableCopies == 0){
-                System.out.println("Sorry, this book is already borrowed. ");
-            }
-            else {
-                System.out.println("Sorry, this book is not in our catalog. ");
-                }
-            }
+            System.out.println("Sorry, this book is already borrowed.");
+        } else {
+            System.out.println("Sorry, this book is not in our catalog.");
+        }
+    }
 
 
-    private int countAvaliableBooks(String bookTitle){
+    private int countAvaliableBooks(String bookTitle) {
         int count = 0;
-        for(Book book : bookNames){
-            if(book.getTitle().equals(bookTitle) && !book.isBorrowed()){
+        for (Book book : bookNames) {
+            if (book.getTitle().equals(bookTitle) && !book.isBorrowed()) {
                 count++;
             }
         }
@@ -110,17 +106,31 @@ public class Library {
 
     }
 
-    public void printAvailableBooks(){
-        //using an array list as recommended
-        List<String> usedNames = new ArrayList<>();
+    public void printAvailableBooks() {
+        if (bookNames.isEmpty()) {
+            System.out.println("No book in catalog");
+        } else {
+            //Array as recommend by professor to stop duplication
+        LinkedHashMap<String, Integer> notUsedCopiesMap = new LinkedHashMap<>();
 
-        for (Book book : bookNames){
-            if(!book.isBorrowed() && !usedNames.contains(book.getTitle())){
-                usedNames.add(book.getTitle());
-                System.out.println(book.getTitle() + ", remaining number of copies: " + countAvaliableBooks(book.getTitle()));
+        for (Book book : bookNames) {
+            String title = book.getTitle();
+
+            //Found a new array that would print out the lord of the rings: 0 and chatGpt helped craft it
+            int leftCopies = notUsedCopiesMap.getOrDefault(title, 0);
+            if (!book.isBorrowed()) {
+                leftCopies++;
             }
+            notUsedCopiesMap.put(title, leftCopies);
+        }
+
+        for (Map.Entry<String, Integer> entry : notUsedCopiesMap.entrySet()) {
+            System.out.println(entry.getKey() + ", remaining number of copies: " + entry.getValue());
         }
     }
+        //implemented to stop second library from sticking to third library
+   System.out.println();
+}
 
     public void returnBook(String bookTitle) {
         for (Book book : bookNames) {
@@ -168,7 +178,7 @@ public class Library {
         secondLibrary.borrowBook("The Lord of the Rings");
         System.out.println();
 
-//        // Print the titles of all available books from both libraries
+       // Print the titles of all available books from both libraries
         System.out.println("Books available in the first library:");
         firstLibrary.printAvailableBooks();
         System.out.println();
@@ -177,8 +187,8 @@ public class Library {
         System.out.println("Books available in the third library:");
         thirdLibrary.printAvailableBooks();
         System.out.println();
-//
-//        // Return The Lords of the Rings to the first library
+
+        // Return The Lords of the Rings to the first library
         System.out.println("Returning The Lord of the Rings:");
         firstLibrary.returnBook("The Lord of the Rings");
         System.out.println();
